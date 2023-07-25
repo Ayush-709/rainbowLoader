@@ -1,38 +1,116 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
   display: flex;
-  flex-direction: column;
+  justify-content: center; /* Use "justify-content" instead of "justify-self" */
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  min-height: 100vh;
+  background: #eaeef0;
 }
 
-.App-link {
-  color: #61dafb;
+.loader {
+  position: relative;
+  display: flex;
 }
 
-@keyframes App-logo-spin {
-  from {
+.loader span {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  background-color: #eaeef0;
+  border: 6px solid #eaeef0;
+  border-radius: 50%;
+  box-shadow: -8px -8px 15px rgba(255, 255, 255, 1),
+              8px 8px 25px rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.loader span::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: inset 10px 10px 20px rgba(0, 0, 0, 0.5), /* Removed extra comma here */
+              inset -5px -5px 15px rgba(255, 255, 255, 1);
+}
+
+.loader span::after {
+  content: "";
+  position: absolute;
+  inset: 40px;
+  background: #eaeef0;
+  border: 3px solid #eaeef0;
+  border-radius: 50%;
+  box-shadow: -8px -8px 25px rgba(255, 255, 255, 1),
+              8px 8px 25px rgba(0, 0, 0, 0.25),
+              -8px -8px 15px rgba(0, 0, 0, 0.15),
+              8px 8px 25px rgba(255, 255, 255, 1);
+}
+
+.loader span i {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(#42abff, #ff4f8b, #ffeb3b);
+  animation: animateLoader 1s linear infinite;
+}
+
+@keyframes animateLoader {
+  0% {
     transform: rotate(0deg);
   }
-  to {
+  100% {
     transform: rotate(360deg);
+  }
+}
+
+.rocket {
+  position: absolute;
+  top: 50px; /* Changed "inset" to "top" for positioning */
+  left: 50px; /* Changed "inset" to "left" for positioning */
+  z-index: 10;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Changed "align-content" to "align-items" for centering */
+  overflow: hidden;
+}
+
+.rocket .fa-rocket {
+  position: absolute;
+  top: 45%;
+  color: #ff518c;
+  font-size: 3.5em;
+  animation: animateRocket 0.2s linear infinite;
+}
+
+@keyframes animateRocket {
+  0%, 100% {
+    transform: translate(0, 0) rotate(-45deg);
+  }
+  50% {
+    transform: translate(0, 3px) rotate(-45deg);
+  }
+}
+
+.rocket .fa-cloud {
+  position: absolute;
+  top: calc(45px * var(--i));
+  left: calc(40px * var(--i));
+  color: #fff;
+  font-size: 2em;
+  animation: animateCloud calc(-0.5s * var(--i)); /* Added "animateCloud" to the animation property */
+}
+
+@keyframes animateCloud {
+  0% {
+    transform: translateY(calc(-35 * 5px));
+  }
+  100% {
+    transform: translateY(calc(35 * 5px));
   }
 }
